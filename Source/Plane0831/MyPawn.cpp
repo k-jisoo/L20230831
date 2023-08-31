@@ -54,6 +54,8 @@ AMyPawn::AMyPawn()
 	MyActorComponent->RotatingMeshes.Add(Right);
 
 	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
+
+	BoostValue = 0.5f;
 }
 
 // Called when the game starts or when spawned
@@ -90,7 +92,7 @@ void AMyPawn::Pitch(float Value)
 
 void AMyPawn::Roll(float Value)
 {
-	AddActorLocalRotation(FRotator(0, Value * UGameplayStatics::GetWorldDeltaSeconds(GetWorld()) * 60.0f, 0));
+	AddActorLocalRotation(FRotator(0,0, Value * UGameplayStatics::GetWorldDeltaSeconds(GetWorld()) * 60.0f));
 }
 
 void AMyPawn::Boost()
