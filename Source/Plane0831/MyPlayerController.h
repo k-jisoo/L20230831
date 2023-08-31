@@ -14,4 +14,9 @@ class PLANE0831_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+	virtual void BeginPlay() override;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputMappingContext* DefaultMappingContext;
 };

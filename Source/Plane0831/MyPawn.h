@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "MyPawn.generated.h"
 
 class UBoxComponent;
@@ -13,6 +14,7 @@ class UCameraComponent;
 class UArrowComponent;
 class UMyActorComponent;
 class UFloatingPawnMovement;
+class UInputAction;
 
 UCLASS()
 class PLANE0831_API AMyPawn : public APawn
@@ -39,9 +41,19 @@ public:
 	
 	void Roll(float Value);
 
+	void Fire();
+
 	void Boost();
 
 	void UnBoost();
+
+	void EnhancedBoost(const FInputActionValue& Value);
+
+	void EnhancedUnBoost(const FInputActionValue& Value);
+
+	void EnhancedFire(const FInputActionValue& Value);
+
+	void EnhancedPitchAndRoll(const FInputActionValue& Value);
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Component")
@@ -80,6 +92,20 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Asset")
 	UStaticMesh* RightMesh;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* IA_Boost;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* IA_Fire;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* IA_PitchAndRoll;
+
+	//C++ 클래스를 넣을 땐 &AMyActor::StaticClass()로 넣어줄 수 있지만 블루프린트 클래스를 넣을 땐 TSubclassOf로 변수 선언 -> BP 레퍼런스 가져와서 넣을거임.
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TSubclassOf<class AMyActor> RocketTemplate;
 	
 public:
 	float BoostValue;
